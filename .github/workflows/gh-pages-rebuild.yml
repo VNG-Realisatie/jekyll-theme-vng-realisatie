@@ -9,6 +9,17 @@ jobs:
 
     steps:
 
+    - name: Check token exists
+      run: |
+        if [ -z "$USER_TOKEN" ]; then
+          echo "TOKEN IS EMPTY"
+          exit 1
+        else
+          echo "TOKEN FOUND"
+        fi
+      env:
+        USER_TOKEN: ${{ secrets.VNG_R_TOKEN }}
+    
     - name: rebuild vng-realisatie/Standaarden
       run: |
         curl \
